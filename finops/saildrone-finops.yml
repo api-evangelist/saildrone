@@ -1,0 +1,87 @@
+specification: API Commons FinOps
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/FinOps
+provider: Saildrone
+providerId: saildrone
+created: '2026-05-24'
+modified: '2026-05-24'
+focusVersion: '1.2'
+reconciled: false
+tags:
+  - Maritime
+  - Defense
+  - Ocean Data
+  - USV
+description: >
+  Saildrone's commercial surface is Mission-as-a-Service (MaaS) — vehicle leases,
+  per-mission contracts, sensor payload upcharges, and government cost-plus
+  arrangements with NOAA, NASA, US Navy, and EUMETSAT. There is no published
+  consumption-priced API. This FinOps document maps Saildrone's *negotiated*
+  billing surface onto FOCUS-style fields so downstream FinOps tooling can model
+  Saildrone spend alongside cloud and SaaS spend, even though invoices are
+  contract-based, not API-metered.
+sources:
+  - https://www.saildrone.com/service-model/fully-managed
+  - https://www.saildrone.com/about
+  - https://www.saildrone.com/data-delivery/api
+billing:
+  model: contract
+  cadence: per-mission
+  currency: USD
+  invoiceCadence: milestone
+  paymentTerms: net-30-or-government-standard
+focusMapping:
+  - ServiceCategory: Maritime Autonomous Systems
+    ServiceName: Saildrone Mission-as-a-Service
+    SkuId: saildrone-maas
+    ChargeCategory: Usage
+    ChargeSubcategory: Vehicle-day
+    PricingUnit: vehicle-day
+    BillingPeriodStart: mission_start_date
+    BillingPeriodEnd: mission_end_date
+    CommitmentDiscountType: contract
+  - ServiceCategory: Maritime Autonomous Systems
+    ServiceName: Saildrone Sensor Payload Upcharge
+    SkuId: saildrone-payload
+    ChargeCategory: Usage
+    ChargeSubcategory: Payload-day
+    PricingUnit: payload-day
+    BillingPeriodStart: mission_start_date
+    BillingPeriodEnd: mission_end_date
+    CommitmentDiscountType: contract
+  - ServiceCategory: Maritime Autonomous Systems
+    ServiceName: Saildrone Mission Portal Seats
+    SkuId: saildrone-portal-seat
+    ChargeCategory: Usage
+    ChargeSubcategory: User-month
+    PricingUnit: seat-month
+    BillingPeriodStart: contract_start_date
+    BillingPeriodEnd: contract_end_date
+    CommitmentDiscountType: contract
+  - ServiceCategory: Maritime Autonomous Systems
+    ServiceName: Saildrone Public Mission API
+    SkuId: saildrone-mission-api
+    ChargeCategory: Bundled
+    ChargeSubcategory: API access bundled with mission contract
+    PricingUnit: bundled
+    BillingPeriodStart: contract_start_date
+    BillingPeriodEnd: contract_end_date
+    CommitmentDiscountType: contract
+costAllocation:
+  - dimension: mission
+    description: Allocate cost to a specific drone deployment / mission ID.
+  - dimension: platform
+    description: Allocate cost by USV class — Explorer, Voyager, Surveyor, Spectre.
+  - dimension: customer-program
+    description: Allocate cost by customer program (e.g. NOAA TPOS, US Navy Task Force 59, NASA SWOT cal/val).
+optimizationLevers:
+  - lever: mission-duration
+    description: Shorter missions reduce total vehicle-day cost.
+  - lever: payload-bundling
+    description: Reusing existing sensor payloads across missions amortizes integration cost.
+  - lever: shared-mission
+    description: Multi-stakeholder missions (e.g. NOAA + academic) split per-vehicle-day cost across funders.
+notes: >
+  No public per-API-call pricing exists; FinOps tooling that ingests this file
+  should treat the Mission API as a bundled, zero-marginal-cost surface and roll
+  the underlying vehicle-day spend up to the mission level.

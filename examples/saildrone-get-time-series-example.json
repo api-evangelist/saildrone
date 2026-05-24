@@ -1,0 +1,50 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://developer-mission.saildrone.com/v1/timeseries/1039?data_set=oceanographic&start_date=2024-06-01T00:00:00Z&end_date=2024-06-01T01:00:00Z&interval=1&limit=1000&order_by=asc",
+    "headers": {
+      "Accept": "application/json",
+      "authorization": "<bearer token from POST /v1/auth>"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "meta": {
+        "TEMP_SBE37_MEAN": {
+          "units": "degree_C",
+          "long_name": "Sea surface temperature mean",
+          "standard_name": "sea_surface_temperature",
+          "valid_min": -2,
+          "valid_max": 40
+        },
+        "SAL_SBE37_MEAN": {
+          "units": "1",
+          "long_name": "Salinity mean (practical)",
+          "standard_name": "sea_water_practical_salinity",
+          "valid_min": 0,
+          "valid_max": 42
+        }
+      },
+      "data": [
+        {
+          "gps_time": 1717200000,
+          "latitude": 37.7724,
+          "longitude": -122.3115,
+          "TEMP_SBE37_MEAN": 13.42,
+          "SAL_SBE37_MEAN": 33.61,
+          "COND_SBE37_MEAN": 4.211
+        },
+        {
+          "gps_time": 1717200060,
+          "latitude": 37.7726,
+          "longitude": -122.3119,
+          "TEMP_SBE37_MEAN": 13.43,
+          "SAL_SBE37_MEAN": 33.62,
+          "COND_SBE37_MEAN": 4.212
+        }
+      ]
+    }
+  }
+}

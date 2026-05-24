@@ -1,0 +1,32 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://developer-mission.saildrone.com/v1/auth/access",
+    "headers": {
+      "Accept": "application/json",
+      "authorization": "<bearer token from POST /v1/auth>"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "data": {
+        "access": [
+          {
+            "drone_id": 1039,
+            "start_date": "2024-04-15T00:00:00Z",
+            "end_date": "2024-11-30T23:59:59Z",
+            "data_set": ["vehicle", "atmospheric", "oceanographic", "biogeochemical"]
+          },
+          {
+            "drone_id": 1040,
+            "start_date": "2024-05-01T00:00:00Z",
+            "end_date": "2024-10-15T23:59:59Z",
+            "data_set": ["vehicle", "atmospheric", "oceanographic"]
+          }
+        ]
+      }
+    }
+  }
+}

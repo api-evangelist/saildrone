@@ -1,0 +1,87 @@
+review:
+  provider: Saildrone
+  providerId: saildrone
+  reviewer: API Evangelist
+  reviewedOn: '2026-05-24'
+  url: https://www.saildrone.com
+  apiPortal: https://www.saildrone.com/data-delivery/api
+  swaggerUI: https://developer-mission.saildrone.com/api-docs
+  status: profiled
+  tier: 1
+  summary: >
+    Saildrone is a maritime autonomy company operating a global fleet of
+    wind/solar autonomous surface vehicles (USVs) collecting ocean and
+    maritime data for NOAA, the US Navy, NASA, and EUMETSAT. Their developer
+    surface centers on the Saildrone Public Mission API (BETA) at
+    developer-mission.saildrone.com — a bearer-token-authenticated REST API
+    delivering per-mission time series across vehicle, atmospheric,
+    oceanographic, and biogeochemical datasets.
+  scoring:
+    documentation:
+      score: 3
+      notes: >
+        Saildrone publishes high-quality marketing pages for the API and
+        Mission Portal and ships a public Swagger UI at
+        developer-mission.saildrone.com/api-docs. However, the OpenAPI spec
+        is not directly downloadable, no public reference docs site exists
+        outside the Swagger UI, and credentials are gated.
+    onboarding:
+      score: 2
+      notes: >
+        No self-serve signup. API keys/secrets are issued only as part of a
+        Saildrone Fully Managed engagement or partner program.
+    sdks:
+      score: 2
+      notes: >
+        No official Saildrone SDKs. Saildrone's GitHub org (github.com/Saildrone)
+        publishes only internal tooling (sequelize-serializer, eslint-config-saildrone,
+        a TestRail CLI fork). Community client exists at nwfsc-fram/SaildroneTS.
+    openData:
+      score: 5
+      notes: >
+        Excellent. Past mission data is published via NOAA PMEL ERDDAP, NCEI,
+        and NOAA OCS, in NetCDF/CSV/JSON/Parquet, with DOIs for citation.
+    surfaceCompleteness:
+      score: 4
+      notes: >
+        The API covers the practical surface for partner data integration —
+        health, auth, access discovery, and per-mission time series. Live
+        multi-INT (radar tracks, AIS, EO/IR, acoustic) is delivered through
+        the Mission Portal rather than the public API.
+  artifactsProduced:
+    openapi:
+      - openapi/saildrone-mission-api-openapi.yml
+    capabilities:
+      - capabilities/mission-health.yaml
+      - capabilities/mission-authentication.yaml
+      - capabilities/mission-time-series.yaml
+    jsonSchema:
+      - json-schema/saildrone-mission-access-schema.json
+      - json-schema/saildrone-mission-time-series-record-schema.json
+    jsonLd:
+      - json-ld/saildrone-context.jsonld
+    examples:
+      - examples/saildrone-authenticate-example.json
+      - examples/saildrone-list-access-example.json
+      - examples/saildrone-get-time-series-example.json
+    plans:
+      - plans/saildrone-plans-pricing.yml
+    rateLimits:
+      - rate-limits/saildrone-rate-limits.yml
+    finops:
+      - finops/saildrone-finops.yml
+    vocabulary:
+      - vocabulary/saildrone-vocabulary.yml
+    rules:
+      - rules/saildrone-rules.yml
+  sources:
+    - https://www.saildrone.com
+    - https://www.saildrone.com/about
+    - https://www.saildrone.com/data-delivery/api
+    - https://www.saildrone.com/data-delivery/mission-portal
+    - https://www.saildrone.com/technology/data
+    - https://developer-mission.saildrone.com/api-docs
+    - https://www.pmel.noaa.gov/ocs/saildrone/data-access
+    - https://data.pmel.noaa.gov/generic/erddap/tabledap/saildrone_gts.html
+    - https://github.com/Saildrone
+    - https://github.com/nwfsc-fram/SaildroneTS

@@ -1,0 +1,332 @@
+openapi: 3.1.0
+info:
+  title: Saildrone Mission API
+  description: >
+    Saildrone Public Mission API (BETA). Provides authenticated access to Saildrone
+    mission telemetry and time-series data collected by Saildrone's fleet of wind/solar
+    autonomous surface vehicles (USVs). Surfaces include health, key/secret
+    authentication, drone access discovery, and per-mission time-series retrieval
+    across vehicle, atmospheric, oceanographic, and biogeochemical datasets.
+    Endpoints, parameters, and authentication flow are reconstructed from the public
+    Swagger interface at developer-mission.saildrone.com/api-docs and confirmed open
+    source clients (e.g. nwfsc-fram/SaildroneTS).
+  version: v1
+  contact:
+    name: Saildrone Data Solutions
+    url: https://www.saildrone.com/contact
+  license:
+    name: Saildrone API Terms
+    url: https://www.saildrone.com/terms
+
+servers:
+  - url: https://developer-mission.saildrone.com
+    description: Saildrone Public Mission API (BETA)
+
+security:
+  - BearerAuth: []
+
+tags:
+  - name: Health
+    description: Service health check
+  - name: Authentication
+    description: Key/secret exchange for bearer tokens and drone access discovery
+  - name: Time Series
+    description: Mission time-series data across vehicle, atmospheric, oceanographic, and biogeochemical datasets
+
+paths:
+  /health:
+    get:
+      summary: Get Service Health
+      description: Returns the health status of the Saildrone Mission API. Used by clients to verify connectivity before authenticating.
+      operationId: getHealth
+      tags:
+        - Health
+      security: []
+      responses:
+        '200':
+          description: Health check response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+
+  /v1/auth:
+    post:
+      summary: Authenticate With Key And Secret
+      description: Exchange a Saildrone-issued API key and secret for a bearer token used on subsequent calls. Tokens are short-lived; clients should re-authenticate before expiry.
+      operationId: authenticate
+      tags:
+        - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthRequest'
+      responses:
+        '200':
+          description: Bearer token issued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          description: Invalid key or secret
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /v1/auth/access:
+    get:
+      summary: List Drone Access
+      description: List drones (missions) the authenticated key has access to, including each drone's allowed start/end date range and which datasets are exposed (vehicle, atmospheric, oceanographic, biogeochemical).
+      operationId: listAccess
+      tags:
+        - Authentication
+      responses:
+        '200':
+          description: List of authorized drones and time ranges
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessResponse'
+        '401':
+          description: Missing or expired bearer token
+
+  /v1/timeseries/{mission}:
+    get:
+      summary: Get Mission Time Series
+      description: Retrieve time-series records for a specific drone/mission and dataset over a given window. Supports interval thinning, limits, and ascending/descending order.
+      operationId: getMissionTimeSeries
+      tags:
+        - Time Series
+      parameters:
+        - name: mission
+          in: path
+          required: true
+          description: Drone / mission identifier (e.g. 1023, 1039, 1040).
+          schema:
+            type: integer
+            example: 1039
+        - name: data_set
+          in: query
+          required: true
+          description: Which Saildrone dataset to return for this mission.
+          schema:
+            type: string
+            enum: [vehicle, atmospheric, oceanographic, biogeochemical]
+            example: oceanographic
+        - name: start_date
+          in: query
+          required: true
+          description: ISO-8601 start date/time (inclusive).
+          schema:
+            type: string
+            format: date-time
+            example: '2024-01-01T00:00:00Z'
+        - name: end_date
+          in: query
+          required: true
+          description: ISO-8601 end date/time (inclusive).
+          schema:
+            type: string
+            format: date-time
+            example: '2024-01-02T00:00:00Z'
+        - name: interval
+          in: query
+          required: false
+          description: Sampling interval in minutes between returned points (1 = no thinning).
+          schema:
+            type: integer
+            default: 1
+            example: 1
+        - name: limit
+          in: query
+          required: false
+          description: Maximum records per response page.
+          schema:
+            type: integer
+            default: 1000
+            example: 1000
+        - name: order_by
+          in: query
+          required: false
+          description: Sort order for gps_time.
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: asc
+      responses:
+        '200':
+          description: Time-series payload with metadata and data array
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeSeriesResponse'
+        '401':
+          description: Missing or expired bearer token
+        '403':
+          description: Mission not in this key's access list
+        '404':
+          description: Mission or dataset not found
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained from POST /v1/auth (sent as `authorization: <token>`).
+
+  schemas:
+    HealthResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        status:
+          type: string
+          example: ok
+
+    AuthRequest:
+      type: object
+      required: [key, secret]
+      properties:
+        key:
+          type: string
+          description: Saildrone-issued API key.
+        secret:
+          type: string
+          description: Saildrone-issued API secret.
+
+    AuthResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        token:
+          type: string
+          description: Bearer token to use in the `authorization` header on subsequent calls.
+        expires_at:
+          type: string
+          format: date-time
+
+    AccessEntry:
+      type: object
+      properties:
+        drone_id:
+          type: integer
+          example: 1039
+        start_date:
+          type: string
+          format: date-time
+        end_date:
+          type: string
+          format: date-time
+        data_set:
+          type: array
+          items:
+            type: string
+            enum: [vehicle, atmospheric, oceanographic, biogeochemical]
+
+    AccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            access:
+              type: array
+              items:
+                $ref: '#/components/schemas/AccessEntry'
+
+    TimeSeriesMeta:
+      type: object
+      description: Per-variable metadata (units, long_name, valid range, etc.) for the returned dataset.
+      additionalProperties:
+        type: object
+        properties:
+          units:
+            type: string
+          long_name:
+            type: string
+          standard_name:
+            type: string
+          valid_min:
+            type: number
+          valid_max:
+            type: number
+
+    TimeSeriesRecord:
+      type: object
+      description: A single time-stamped sample. Fields vary by dataset (vehicle, atmospheric, oceanographic, biogeochemical) but always include gps_time, latitude, longitude.
+      properties:
+        gps_time:
+          type: number
+          description: Unix epoch (seconds) of the sample.
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        TEMP_AIR_MEAN:
+          type: number
+          description: Air temperature mean (atmospheric dataset).
+        WIND_FROM_MEAN:
+          type: number
+          description: Wind direction mean, degrees (atmospheric dataset).
+        WIND_SPEED_MEAN:
+          type: number
+          description: Wind speed mean, m/s (atmospheric dataset).
+        TEMP_SBE37_MEAN:
+          type: number
+          description: Sea surface temperature mean, deg C (oceanographic dataset).
+        SAL_SBE37_MEAN:
+          type: number
+          description: Sea surface salinity mean (oceanographic dataset).
+        O2_CONC_SBE37_MEAN:
+          type: number
+          description: Dissolved oxygen concentration (biogeochemical dataset).
+        CHLOR_RBR_MEAN:
+          type: number
+          description: Chlorophyll-a, mg/m^3 (biogeochemical dataset).
+        CO2_DRY_PPM:
+          type: number
+          description: Atmospheric CO2 mole fraction, ppm (biogeochemical dataset).
+        SOG:
+          type: number
+          description: Speed over ground, knots (vehicle dataset).
+        COG:
+          type: number
+          description: Course over ground, degrees (vehicle dataset).
+        HDG:
+          type: number
+          description: Heading, degrees (vehicle dataset).
+
+    TimeSeriesResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        meta:
+          $ref: '#/components/schemas/TimeSeriesMeta'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeSeriesRecord'
+
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+        code:
+          type: integer

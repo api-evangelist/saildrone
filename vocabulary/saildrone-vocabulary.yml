@@ -1,0 +1,77 @@
+vocabulary: Saildrone
+provider: Saildrone
+providerId: saildrone
+created: '2026-05-24'
+modified: '2026-05-24'
+description: Domain vocabulary for Saildrone's USV platforms, missions, datasets, and partner programs.
+terms:
+  - term: USV
+    expansion: Unmanned Surface Vehicle
+    description: Autonomous wind/solar-powered surface vessel; Saildrone's core product class.
+  - term: Drone
+    description: Saildrone's customer-facing name for an individual USV. Each drone has a numeric ID (e.g. 1039) used as a mission identifier in the API.
+  - term: Mission
+    description: A scheduled deployment of one or more drones for a defined customer, area, and data goal. Mission IDs are reused as the path parameter in /v1/timeseries/{mission}.
+  - term: Explorer
+    description: Saildrone's 23ft compact USV class, optimized for environmental sensing.
+  - term: Voyager
+    description: Saildrone's 33ft mid-size multi-mission USV class — maritime domain awareness and counter-narcotics.
+  - term: Surveyor
+    description: Saildrone's 65ft deep-ocean bathymetric mapping USV.
+  - term: Spectre
+    description: Saildrone's newest USV class with Silent Endurance (ASW/ISR) and Stealth Strike (kinetic) variants.
+  - term: METOC
+    expansion: Meteorological and Oceanographic
+    description: Combined air/sea observation data — wind, waves, temperature, salinity. The atmospheric and oceanographic datasets in the Saildrone API are the METOC surface.
+  - term: MDA
+    expansion: Maritime Domain Awareness
+    description: Persistent surveillance for surface vessels, AIS contacts, and dark targets.
+  - term: ISR
+    expansion: Intelligence, Surveillance, Reconnaissance
+    description: Defense application class for Saildrone Spectre and Voyager.
+  - term: ASW
+    expansion: Anti-Submarine Warfare
+    description: Spectre Silent Endurance mission profile using towed-array acoustic detection.
+  - term: TPOS
+    expansion: Tropical Pacific Observing System
+    description: Long-running NOAA program; Saildrone provides USV-based observations published via PMEL ERDDAP.
+  - term: Mission Portal
+    description: Saildrone's secure web app for tasking, geofences, alerts, and live multi-INT visualization.
+  - term: ERDDAP
+    expansion: Environmental Research Division's Data Access Program
+    description: NOAA's open-data server (used by PMEL) for Saildrone open data downloads in NetCDF, CSV, JSON, and Parquet.
+  - term: Multi-INT
+    description: Combined radar, AIS, EO/IR, acoustic, and environmental data streams delivered by the Saildrone API and Mission Portal.
+  - term: Time Series
+    description: 1-minute-averaged measurements per drone/dataset, accessible via /v1/timeseries/{mission}.
+  - term: Drone Access
+    description: A record returned from /v1/auth/access listing the drone_id, start/end date range, and datasets an API key is authorized to query.
+datasets:
+  - name: vehicle
+    description: USV telemetry — SOG, COG, HDG, battery voltage, solar input.
+  - name: atmospheric
+    description: METOC atmosphere — air temperature, RH, barometric pressure, wind, waves.
+  - name: oceanographic
+    description: Ocean surface — sea surface temperature, salinity, conductivity.
+  - name: biogeochemical
+    description: BGC — dissolved oxygen, chlorophyll-a, CO2 (dry mole fraction and seawater partial pressure).
+platforms:
+  - name: Explorer
+    length: 23ft
+    primaryUse: Environmental sensing
+  - name: Voyager
+    length: 33ft
+    primaryUse: MDA, counter-narcotics
+  - name: Surveyor
+    length: 65ft
+    primaryUse: Deep-ocean seafloor mapping
+  - name: Spectre
+    primaryUse: ISR / ASW / kinetic
+partners:
+  - NOAA PMEL
+  - NOAA SWFSC
+  - US Navy (Task Force 59)
+  - NASA (SWOT cal/val)
+  - EUMETSAT
+  - Lockheed Martin
+  - BOEM

@@ -1,0 +1,123 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Saildrone Mission API — Time Series
+  description: Saildrone Mission API per-mission time-series retrieval across vehicle, atmospheric, oceanographic, and biogeochemical datasets. 1 operation. Self-contained Naftiko capability covering one Saildrone business surface.
+  tags:
+    - Saildrone
+    - Time Series
+    - Ocean Data
+    - METOC
+  created: '2026-05-24'
+  modified: '2026-05-24'
+binds:
+  - namespace: env
+    keys:
+      SAILDRONE_TOKEN: SAILDRONE_TOKEN
+capability:
+  consumes:
+    - type: http
+      namespace: mission-time-series
+      baseUri: https://developer-mission.saildrone.com
+      description: Saildrone Mission API — Time Series business capability. Self-contained, no shared references.
+      resources:
+        - name: v1-timeseries-mission
+          path: /v1/timeseries/{mission}
+          operations:
+            - name: getmissiontimeseries
+              method: GET
+              description: Saildrone Get Mission Time Series
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: mission
+                  in: path
+                  type: integer
+                  description: Drone / mission identifier.
+                  required: true
+                - name: data_set
+                  in: query
+                  type: string
+                  description: Which Saildrone dataset to return (vehicle, atmospheric, oceanographic, biogeochemical).
+                  required: true
+                - name: start_date
+                  in: query
+                  type: string
+                  description: ISO-8601 start date/time (inclusive).
+                  required: true
+                - name: end_date
+                  in: query
+                  type: string
+                  description: ISO-8601 end date/time (inclusive).
+                  required: true
+                - name: interval
+                  in: query
+                  type: integer
+                  description: Sampling interval in minutes.
+                  required: false
+                - name: limit
+                  in: query
+                  type: integer
+                  description: Max records per page.
+                  required: false
+                - name: order_by
+                  in: query
+                  type: string
+                  description: Sort order (asc or desc).
+                  required: false
+      authentication:
+        type: bearer
+        placement: header
+        key: authorization
+        value: '{{env.SAILDRONE_TOKEN}}'
+  exposes:
+    - type: rest
+      namespace: mission-time-series-rest
+      port: 8080
+      description: REST adapter for Saildrone Mission API — Time Series.
+      resources:
+        - path: /v1/v1/timeseries/{mission}
+          name: v1-timeseries-mission
+          description: REST surface for v1-timeseries-mission.
+          operations:
+            - method: GET
+              name: getmissiontimeseries
+              description: Saildrone Get Mission Time Series
+              call: mission-time-series.getmissiontimeseries
+              with:
+                mission: rest.path.mission
+                data_set: rest.query.data_set
+                start_date: rest.query.start_date
+                end_date: rest.query.end_date
+                interval: rest.query.interval
+                limit: rest.query.limit
+                order_by: rest.query.order_by
+              outputParameters:
+                - type: object
+                  mapping: $.
+    - type: mcp
+      namespace: mission-time-series-mcp
+      port: 9090
+      transport: http
+      description: MCP adapter for Saildrone Mission API — Time Series.
+      tools:
+        - name: saildrone-get-mission-time-series
+          description: Saildrone Get Mission Time Series
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: mission-time-series.getmissiontimeseries
+          with:
+            mission: tools.mission
+            data_set: tools.data_set
+            start_date: tools.start_date
+            end_date: tools.end_date
+            interval: tools.interval
+            limit: tools.limit
+            order_by: tools.order_by
+          outputParameters:
+            - type: object
+              mapping: $.

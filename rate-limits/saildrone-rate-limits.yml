@@ -1,0 +1,82 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Saildrone
+providerId: saildrone
+created: '2026-05-24'
+modified: '2026-05-24'
+reconciled: false
+tags:
+  - Maritime
+  - Ocean Data
+  - USV
+description: >
+  Saildrone has not published rate-limit numbers for the Public Mission API (BETA)
+  on developer-mission.saildrone.com. Observed behavior from open source clients
+  (e.g. nwfsc-fram/SaildroneTS) shows pagination via `limit` (default 1000 rows)
+  and `interval` (minutes between samples) parameters rather than per-key request
+  budgets. Bearer tokens issued by POST /v1/auth are short-lived and clients are
+  expected to refresh them. Documented values below are derived from client code
+  and Saildrone's stated "schema-driven, AI/ML-ready" design rather than from a
+  published rate-limit page.
+sources:
+  - https://developer-mission.saildrone.com/api-docs
+  - https://github.com/nwfsc-fram/SaildroneTS
+  - https://www.saildrone.com/data-delivery/api
+policies:
+  - id: saildrone-mission-api-pagination
+    name: Mission API pagination window
+    scope: per-request
+    surface: https://developer-mission.saildrone.com/v1/timeseries/{mission}
+    type: pagination
+    metric: records
+    limit: 1000
+    timeFrame: per-request
+    description: >
+      The /v1/timeseries/{mission} endpoint paginates by `limit` rows per
+      response, defaulting to 1000 in widely-used reference clients. Clients
+      re-window using the latest gps_time and call again to advance.
+    headers: []
+    overage: continue-paging
+  - id: saildrone-mission-api-interval
+    name: Mission API sampling interval
+    scope: per-request
+    surface: https://developer-mission.saildrone.com/v1/timeseries/{mission}
+    type: thinning
+    metric: minutes
+    limit: 1
+    timeFrame: per-sample
+    description: >
+      Clients can pass `interval` (minutes) to thin the time series at the
+      server side; default of 1 minute matches Saildrone's native 1-minute
+      averaged METOC cadence.
+    headers: []
+    overage: server-thins
+  - id: saildrone-mission-api-auth-token-ttl
+    name: Bearer token TTL
+    scope: per-token
+    surface: https://developer-mission.saildrone.com/v1/auth
+    type: token-lifetime
+    metric: tokens
+    limit: 1
+    timeFrame: short-lived
+    description: >
+      Bearer tokens are short-lived; observed Saildrone reference clients
+      re-authenticate before each batch run. Saildrone has not published a fixed
+      TTL value.
+    headers: []
+    overage: re-authenticate
+  - id: saildrone-open-data-pmel-erddap
+    name: NOAA PMEL ERDDAP rate limits
+    scope: per-ip
+    surface: https://data.pmel.noaa.gov/generic/erddap/
+    type: shared-data-portal
+    metric: requests
+    limit: -1
+    timeFrame: per-day
+    description: >
+      Saildrone open data hosted on NOAA PMEL ERDDAP follows ERDDAP's own
+      fair-use rate limits and per-IP concurrency caps, which are not
+      Saildrone-controlled. Heavy users should follow ERDDAP best practices.
+    headers: []
+    overage: throttled-by-erddap

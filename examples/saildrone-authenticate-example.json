@@ -1,0 +1,22 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://developer-mission.saildrone.com/v1/auth",
+    "headers": {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    "body": {
+      "key": "YOUR_SAILDRONE_API_KEY",
+      "secret": "YOUR_SAILDRONE_API_SECRET"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBUEkiLCJpYXQiOjE3MTYxMjM0NTZ9.example-signature",
+      "expires_at": "2026-05-25T00:00:00Z"
+    }
+  }
+}

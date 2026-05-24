@@ -1,0 +1,106 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Saildrone
+providerId: saildrone
+created: '2026-05-24'
+modified: '2026-05-24'
+reconciled: false
+tags:
+  - Maritime
+  - Ocean Data
+  - USV
+  - Defense
+  - METOC
+description: >
+  Saildrone does not publish a public, self-serve developer pricing tier. The
+  Saildrone Public Mission API (BETA) at developer-mission.saildrone.com is
+  gated behind contractual access — credentials (key/secret) are issued only as
+  part of a Saildrone "Mission-as-a-Service" / Fully Managed engagement or
+  through a partner programs (NOAA PMEL, US Navy, NASA, EUMETSAT). All commercial
+  terms are negotiated per-mission, per-fleet, or per-dataset; revenue is
+  recognized against the underlying USV deployment, not API calls.
+  This plans file therefore documents the commercial *surfaces* rather than a
+  published price list. Open data from past missions is available free via NOAA
+  PMEL ERDDAP and NCEI for non-commercial use.
+sources:
+  - https://www.saildrone.com/service-model/fully-managed
+  - https://www.saildrone.com/data-delivery/api
+  - https://www.saildrone.com/data-delivery/mission-portal
+  - https://www.pmel.noaa.gov/ocs/saildrone/data-access
+plans:
+  - id: saildrone-fully-managed-maas
+    name: Saildrone Fully Managed (Mission-as-a-Service)
+    type: contract
+    description: >
+      End-to-end managed USV missions — vehicle, crew, operations center, data
+      delivery via API and Mission Portal. Pricing is per-mission, per-vehicle-day,
+      and varies by platform (Explorer, Voyager, Surveyor, Spectre), mission
+      profile, sensor payload, and area of operation. Contact Saildrone for
+      a quote.
+    entries:
+      - label: Mission-as-a-Service engagement
+        name: mission_engagement
+        type: contract
+        metric: missions
+        limit: -1
+        timeFrame: contract
+        geo: global
+        unit: 1
+        price: 'contact-sales'
+        userMultiplied: false
+  - id: saildrone-developer-mission-api-beta
+    name: Saildrone Public Mission API (BETA)
+    type: gated
+    description: >
+      Access to live and historical mission telemetry via
+      developer-mission.saildrone.com. Credentials are issued to authorized
+      partners only — there is no self-serve signup. API access is bundled with
+      a customer's underlying Saildrone engagement and is not separately metered
+      or invoiced at the time of profiling.
+    entries:
+      - label: API access (bundled)
+        name: api_access_bundled
+        type: bundled
+        metric: requests
+        limit: -1
+        timeFrame: contract
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+  - id: saildrone-mission-portal
+    name: Saildrone Mission Portal
+    type: gated
+    description: >
+      Web-based command and control portal for tasking and live multi-INT data
+      visualization. Bundled with Fully Managed engagements. Not separately priced.
+    entries:
+      - label: Mission Portal access (bundled)
+        name: mission_portal_access_bundled
+        type: bundled
+        metric: seats
+        limit: -1
+        timeFrame: contract
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+  - id: saildrone-open-data-pmel
+    name: NOAA PMEL Saildrone Open Data
+    type: free
+    description: >
+      Past Saildrone TPOS, Arctic, and partner mission data published as
+      NetCDF / CSV / JSON via PMEL ERDDAP and NCEI. Free at point of use under
+      open-data terms; not Saildrone-commercial.
+    entries:
+      - label: Open-data download
+        name: open_data_download
+        type: free
+        metric: downloads
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false

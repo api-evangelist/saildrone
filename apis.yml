@@ -1,0 +1,142 @@
+aid: saildrone
+name: Saildrone
+description: >-
+  Saildrone is an Alameda, California maritime autonomy company that designs,
+  manufactures, and operates a global fleet of wind/solar-powered autonomous
+  surface vehicles (USVs) for ocean science, maritime domain awareness, and
+  defense applications. Founded in 2012 by Richard Jenkins, the company runs
+  four USV classes — Explorer (23ft, environmental sensing), Voyager (33ft,
+  MDA and counter-narcotics), Surveyor (65ft, deep-ocean bathymetric mapping),
+  and the newer Spectre (ISR / anti-submarine warfare / kinetic payloads).
+  Saildrone has logged over 2.5M nautical miles and 65,000 days at sea across
+  customers including NOAA PMEL, NOAA SWFSC, the US Navy (Task Force 59),
+  NASA, EUMETSAT, BOEM, and Lockheed Martin (which invested $50M in
+  October 2025). Saildrone delivers data through two product surfaces — the
+  Saildrone Mission Portal (secure web app for tasking and live multi-INT
+  visualization) and the Saildrone Public Mission API (BETA) at
+  developer-mission.saildrone.com, which exposes key/secret authenticated
+  endpoints for health, drone access discovery, and time-series retrieval
+  across vehicle, atmospheric, oceanographic, and biogeochemical datasets.
+  Open ocean data from past missions is published via NOAA PMEL ERDDAP and
+  NCEI under open-data terms.
+type: Index
+position: Provider
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Maritime
+  - Ocean Data
+  - USV
+  - Unmanned Surface Vehicle
+  - Autonomous Systems
+  - METOC
+  - Maritime Domain Awareness
+  - Anti Submarine Warfare
+  - Defense
+  - Climate
+  - Oceanography
+  - Bathymetry
+  - Biogeochemical
+url: https://raw.githubusercontent.com/api-evangelist/saildrone/refs/heads/main/apis.yml
+created: '2026-05-24'
+modified: '2026-05-24'
+specificationVersion: '0.20'
+apis:
+  - aid: saildrone:saildrone-mission-api
+    name: Saildrone Mission API
+    tags:
+      - Saildrone
+      - Mission
+      - Time Series
+      - Ocean Data
+      - METOC
+    humanURL: https://www.saildrone.com/data-delivery/api
+    properties:
+      - url: https://www.saildrone.com/data-delivery/api
+        type: Documentation
+      - url: https://developer-mission.saildrone.com/api-docs
+        type: SwaggerUI
+      - url: openapi/saildrone-mission-api-openapi.yml
+        type: OpenAPI
+      - url: json-schema/saildrone-mission-access-schema.json
+        type: JSONSchema
+      - url: json-schema/saildrone-mission-time-series-record-schema.json
+        type: JSONSchema
+      - url: json-ld/saildrone-context.jsonld
+        type: JSONLD
+      - url: examples/saildrone-authenticate-example.json
+        type: Example
+      - url: examples/saildrone-list-access-example.json
+        type: Example
+      - url: examples/saildrone-get-time-series-example.json
+        type: Example
+      - url: rules/saildrone-rules.yml
+        type: SpectralRules
+      - type: NaftikoCapability
+        url: capabilities/mission-health.yaml
+      - type: NaftikoCapability
+        url: capabilities/mission-authentication.yaml
+      - type: NaftikoCapability
+        url: capabilities/mission-time-series.yaml
+    description: >-
+      Saildrone Public Mission API (BETA). Provides authenticated access via a
+      key/secret bearer flow to per-mission time-series telemetry across the
+      four canonical Saildrone datasets — vehicle, atmospheric, oceanographic,
+      and biogeochemical — plus drone access discovery and a health probe.
+      Hosted at developer-mission.saildrone.com.
+common:
+  - type: Website
+    url: https://www.saildrone.com
+  - type: About
+    url: https://www.saildrone.com/about
+  - type: API
+    url: https://www.saildrone.com/data-delivery/api
+  - type: SwaggerUI
+    url: https://developer-mission.saildrone.com/api-docs
+  - type: MissionPortal
+    url: https://www.saildrone.com/data-delivery/mission-portal
+  - type: DataProducts
+    url: https://www.saildrone.com/technology/data
+  - type: Platform
+    url: https://www.saildrone.com/platform/spectre
+  - type: Platform
+    url: https://www.saildrone.com/platform/surveyor
+  - type: Platform
+    url: https://www.saildrone.com/platform/voyager
+  - type: Platform
+    url: https://www.saildrone.com/platform/explorer
+  - type: Service
+    url: https://www.saildrone.com/service-model/fully-managed
+  - type: Capability
+    url: https://www.saildrone.com/capabilities/metocean-survey
+  - type: News
+    url: https://www.saildrone.com/news
+  - type: Press
+    url: https://www.saildrone.com/press
+  - type: Careers
+    url: https://www.saildrone.com/careers
+  - type: Contact
+    url: https://www.saildrone.com/contact
+  - type: PartnerOpenData
+    url: https://www.pmel.noaa.gov/ocs/saildrone/data-access
+  - type: PartnerOpenData
+    url: https://data.pmel.noaa.gov/generic/erddap/tabledap/saildrone_gts.html
+  - type: GitHub
+    url: https://github.com/Saildrone
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/saildrone
+  - type: Twitter
+    url: https://twitter.com/saildrone
+  - type: YouTube
+    url: https://www.youtube.com/@saildrone
+  - type: Plans
+    url: plans/saildrone-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/saildrone-rate-limits.yml
+  - type: FinOps
+    url: finops/saildrone-finops.yml
+  - type: Vocabulary
+    url: vocabulary/saildrone-vocabulary.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

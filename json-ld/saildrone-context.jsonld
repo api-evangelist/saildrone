@@ -1,0 +1,108 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "saildrone": "https://raw.githubusercontent.com/api-evangelist/saildrone/main/json-ld/saildrone-context.jsonld#",
+    "schema": "https://schema.org/",
+    "cf": "http://vocab.nerc.ac.uk/standard_name/",
+    "geo": "http://www.opengis.net/ont/geosparql#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "prov": "http://www.w3.org/ns/prov#",
+
+    "Saildrone": "schema:Organization",
+    "USV": "saildrone:UnmannedSurfaceVehicle",
+    "Mission": "saildrone:Mission",
+    "DroneAccess": "saildrone:DroneAccess",
+    "Dataset": "dcat:Dataset",
+    "TimeSeriesRecord": "saildrone:TimeSeriesRecord",
+    "Platform": "saildrone:Platform",
+
+    "drone_id": {
+      "@id": "saildrone:droneId",
+      "@type": "schema:identifier"
+    },
+    "mission": {
+      "@id": "saildrone:mission",
+      "@type": "@id"
+    },
+    "data_set": {
+      "@id": "saildrone:dataSet",
+      "@container": "@set"
+    },
+    "start_date": {
+      "@id": "saildrone:startDate",
+      "@type": "schema:DateTime"
+    },
+    "end_date": {
+      "@id": "saildrone:endDate",
+      "@type": "schema:DateTime"
+    },
+    "gps_time": {
+      "@id": "saildrone:gpsTime",
+      "@type": "schema:DateTime"
+    },
+    "latitude": {
+      "@id": "schema:latitude",
+      "@type": "xsd:decimal"
+    },
+    "longitude": {
+      "@id": "schema:longitude",
+      "@type": "xsd:decimal"
+    },
+
+    "TEMP_AIR_MEAN": "cf:air_temperature",
+    "RH_MEAN": "cf:relative_humidity",
+    "BARO_PRES_MEAN": "cf:air_pressure_at_sea_level",
+    "WIND_FROM_MEAN": "cf:wind_from_direction",
+    "WIND_SPEED_MEAN": "cf:wind_speed",
+    "WAVE_DOMINANT_PERIOD": "cf:sea_surface_wave_period_at_variance_spectral_density_maximum",
+    "WAVE_SIGNIFICANT_HEIGHT": "cf:sea_surface_wave_significant_height",
+    "TEMP_SBE37_MEAN": "cf:sea_surface_temperature",
+    "SAL_SBE37_MEAN": "cf:sea_water_practical_salinity",
+    "COND_SBE37_MEAN": "cf:sea_water_electrical_conductivity",
+    "O2_CONC_SBE37_MEAN": "cf:mole_concentration_of_dissolved_molecular_oxygen_in_sea_water",
+    "CHLOR_RBR_MEAN": "cf:mass_concentration_of_chlorophyll_a_in_sea_water",
+    "CO2_DRY_PPM": "cf:mole_fraction_of_carbon_dioxide_in_air",
+    "PCO2_SW_DRY": "cf:surface_partial_pressure_of_carbon_dioxide_in_sea_water",
+    "SOG": "cf:platform_speed_wrt_ground",
+    "COG": "cf:platform_course",
+    "HDG": "cf:platform_orientation"
+  },
+  "@graph": [
+    {
+      "@id": "saildrone:Saildrone",
+      "@type": "Saildrone",
+      "schema:name": "Saildrone",
+      "schema:url": "https://www.saildrone.com",
+      "schema:foundingDate": "2012",
+      "schema:founder": "Richard Jenkins",
+      "schema:location": "Alameda, California, USA"
+    },
+    {
+      "@id": "saildrone:Platform/Explorer",
+      "@type": "Platform",
+      "schema:name": "Saildrone Explorer",
+      "saildrone:length": "23ft",
+      "saildrone:purpose": "Environmental sensing"
+    },
+    {
+      "@id": "saildrone:Platform/Voyager",
+      "@type": "Platform",
+      "schema:name": "Saildrone Voyager",
+      "saildrone:length": "33ft",
+      "saildrone:purpose": "Maritime domain awareness, counter-narcotics"
+    },
+    {
+      "@id": "saildrone:Platform/Surveyor",
+      "@type": "Platform",
+      "schema:name": "Saildrone Surveyor",
+      "saildrone:length": "65ft",
+      "saildrone:purpose": "Deep-ocean seafloor mapping"
+    },
+    {
+      "@id": "saildrone:Platform/Spectre",
+      "@type": "Platform",
+      "schema:name": "Saildrone Spectre",
+      "saildrone:purpose": "ISR / anti-submarine warfare, kinetic payloads"
+    }
+  ]
+}

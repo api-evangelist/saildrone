@@ -1,0 +1,53 @@
+extends:
+  - spectral:oas
+rules:
+  saildrone-operation-summary-required:
+    description: Every operation must have a non-empty Title Case summary.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: summary
+      function: truthy
+  saildrone-operation-id-camel-case:
+    description: operationId should be camelCase.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-zA-Z0-9]*$'
+  saildrone-paths-must-be-versioned:
+    description: All Saildrone Mission API resource paths must be versioned under /v1 (the /health probe is the only allowed exception).
+    severity: error
+    given: $.paths
+    then:
+      function: pattern
+      functionOptions:
+        match: '^/(health|v1/)'
+  saildrone-bearer-auth-required:
+    description: All non-public operations must declare bearer auth (the /health and /v1/auth operations are the only allowed exceptions).
+    severity: warn
+    given: $.paths[?(@property != '/health' && @property != '/v1/auth')][get,post,put,patch,delete]
+    then:
+      field: security
+      function: truthy
+  saildrone-dataset-enum:
+    description: Any parameter named data_set must enumerate the four canonical Saildrone datasets.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.name == 'data_set')].schema.enum
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          contains:
+            enum: [vehicle, atmospheric, oceanographic, biogeochemical]
+  saildrone-time-params-iso:
+    description: start_date and end_date query params must be date-time strings.
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete].parameters[?(@.name == 'start_date' || @.name == 'end_date')].schema"
+    then:
+      field: format
+      function: pattern
+      functionOptions:
+        match: '^date-time$'

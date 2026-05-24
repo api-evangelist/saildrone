@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/saildrone/main/json-schema/saildrone-mission-time-series-record-schema.json",
+  "title": "Saildrone Mission Time Series Record",
+  "description": "A single time-stamped sample emitted by /v1/timeseries/{mission}. Fields vary by dataset; gps_time, latitude, and longitude are always present. Variable names follow CF/ACDD conventions used in Saildrone's NetCDF and PMEL ERDDAP outputs.",
+  "type": "object",
+  "required": ["gps_time", "latitude", "longitude"],
+  "properties": {
+    "gps_time": {
+      "type": "number",
+      "description": "Unix epoch (seconds) of the sample."
+    },
+    "latitude": {
+      "type": "number",
+      "minimum": -90,
+      "maximum": 90,
+      "description": "Latitude in decimal degrees, WGS84."
+    },
+    "longitude": {
+      "type": "number",
+      "minimum": -180,
+      "maximum": 180,
+      "description": "Longitude in decimal degrees, WGS84."
+    },
+    "TEMP_AIR_MEAN": {
+      "type": "number",
+      "description": "Air temperature mean (degC). atmospheric dataset."
+    },
+    "RH_MEAN": {
+      "type": "number",
+      "description": "Relative humidity mean (%). atmospheric dataset."
+    },
+    "BARO_PRES_MEAN": {
+      "type": "number",
+      "description": "Barometric pressure mean (hPa). atmospheric dataset."
+    },
+    "WIND_FROM_MEAN": {
+      "type": "number",
+      "description": "Wind direction from, mean (degrees). atmospheric dataset."
+    },
+    "WIND_SPEED_MEAN": {
+      "type": "number",
+      "description": "Wind speed mean (m/s). atmospheric dataset."
+    },
+    "WAVE_DOMINANT_PERIOD": {
+      "type": "number",
+      "description": "Dominant wave period (s). atmospheric dataset."
+    },
+    "WAVE_SIGNIFICANT_HEIGHT": {
+      "type": "number",
+      "description": "Significant wave height (m). atmospheric dataset."
+    },
+    "TEMP_SBE37_MEAN": {
+      "type": "number",
+      "description": "Sea surface temperature mean from SBE37 (degC). oceanographic dataset."
+    },
+    "SAL_SBE37_MEAN": {
+      "type": "number",
+      "description": "Salinity mean from SBE37 (PSU). oceanographic dataset."
+    },
+    "COND_SBE37_MEAN": {
+      "type": "number",
+      "description": "Conductivity mean from SBE37 (S/m). oceanographic dataset."
+    },
+    "O2_CONC_SBE37_MEAN": {
+      "type": "number",
+      "description": "Dissolved oxygen concentration (umol/kg). biogeochemical dataset."
+    },
+    "CHLOR_RBR_MEAN": {
+      "type": "number",
+      "description": "Chlorophyll-a fluorescence (mg/m^3). biogeochemical dataset."
+    },
+    "CO2_DRY_PPM": {
+      "type": "number",
+      "description": "Atmospheric CO2 dry mole fraction (ppm). biogeochemical dataset."
+    },
+    "PCO2_SW_DRY": {
+      "type": "number",
+      "description": "Partial pressure of CO2 in seawater (uatm). biogeochemical dataset."
+    },
+    "SOG": {
+      "type": "number",
+      "description": "Speed over ground (knots). vehicle dataset."
+    },
+    "COG": {
+      "type": "number",
+      "description": "Course over ground (degrees). vehicle dataset."
+    },
+    "HDG": {
+      "type": "number",
+      "description": "Heading (degrees). vehicle dataset."
+    },
+    "BATTERY_VOLTAGE": {
+      "type": "number",
+      "description": "Battery voltage (V). vehicle dataset."
+    },
+    "SOLAR_INPUT": {
+      "type": "number",
+      "description": "Solar input (W). vehicle dataset."
+    }
+  },
+  "additionalProperties": true
+}
