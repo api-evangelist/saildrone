@@ -1,24 +1,17 @@
 aid: saildrone
 name: Saildrone
 description: >-
-  Saildrone is an Alameda, California maritime autonomy company that designs,
-  manufactures, and operates a global fleet of wind/solar-powered autonomous
-  surface vehicles (USVs) for ocean science, maritime domain awareness, and
-  defense applications. Founded in 2012 by Richard Jenkins, the company runs
-  four USV classes — Explorer (23ft, environmental sensing), Voyager (33ft,
-  MDA and counter-narcotics), Surveyor (65ft, deep-ocean bathymetric mapping),
-  and the newer Spectre (ISR / anti-submarine warfare / kinetic payloads).
-  Saildrone has logged over 2.5M nautical miles and 65,000 days at sea across
-  customers including NOAA PMEL, NOAA SWFSC, the US Navy (Task Force 59),
-  NASA, EUMETSAT, BOEM, and Lockheed Martin (which invested $50M in
-  October 2025). Saildrone delivers data through two product surfaces — the
-  Saildrone Mission Portal (secure web app for tasking and live multi-INT
-  visualization) and the Saildrone Public Mission API (BETA) at
-  developer-mission.saildrone.com, which exposes key/secret authenticated
-  endpoints for health, drone access discovery, and time-series retrieval
-  across vehicle, atmospheric, oceanographic, and biogeochemical datasets.
-  Open ocean data from past missions is published via NOAA PMEL ERDDAP and
-  NCEI under open-data terms.
+  Saildrone is an Alameda, California maritime autonomy company that designs, manufactures, and operates a global fleet
+  of wind/solar-powered autonomous surface vehicles (USVs) for ocean science, maritime domain awareness, and defense
+  applications. Founded in 2012 by Richard Jenkins, the company runs four USV classes — Explorer (23ft, environmental
+  sensing), Voyager (33ft, MDA and counter-narcotics), Surveyor (65ft, deep-ocean bathymetric mapping), and the newer
+  Spectre (ISR / anti-submarine warfare / kinetic payloads). Saildrone has logged over 2.5M nautical miles and 65,000
+  days at sea across customers including NOAA PMEL, NOAA SWFSC, the US Navy (Task Force 59), NASA, EUMETSAT, BOEM, and
+  Lockheed Martin (which invested $50M in October 2025). Saildrone delivers data through two product surfaces — the
+  Saildrone Mission Portal (secure web app for tasking and live multi-INT visualization) and the Saildrone Public
+  Mission API (BETA) at developer-mission.saildrone.com, which exposes key/secret authenticated endpoints for health,
+  drone access discovery, and time-series retrieval across vehicle, atmospheric, oceanographic, and biogeochemical
+  datasets. Open ocean data from past missions is published via NOAA PMEL ERDDAP and NCEI under open-data terms.
 type: Index
 position: Provider
 access: 3rd-Party
@@ -72,18 +65,10 @@ apis:
         type: Example
       - url: rules/saildrone-rules.yml
         type: SpectralRules
-      - type: NaftikoCapability
-        url: capabilities/mission-health.yaml
-      - type: NaftikoCapability
-        url: capabilities/mission-authentication.yaml
-      - type: NaftikoCapability
-        url: capabilities/mission-time-series.yaml
     description: >-
-      Saildrone Public Mission API (BETA). Provides authenticated access via a
-      key/secret bearer flow to per-mission time-series telemetry across the
-      four canonical Saildrone datasets — vehicle, atmospheric, oceanographic,
-      and biogeochemical — plus drone access discovery and a health probe.
-      Hosted at developer-mission.saildrone.com.
+      Saildrone Public Mission API (BETA). Provides authenticated access via a key/secret bearer flow to per-mission
+      time-series telemetry across the four canonical Saildrone datasets — vehicle, atmospheric, oceanographic, and
+      biogeochemical — plus drone access discovery and a health probe. Hosted at developer-mission.saildrone.com.
 common:
   - type: Website
     url: https://www.saildrone.com
