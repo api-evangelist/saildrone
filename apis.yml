@@ -58,11 +58,11 @@ apis:
       - url: json-ld/saildrone-context.jsonld
         type: JSONLD
       - url: examples/saildrone-authenticate-example.json
-        type: Example
+        type: Examples
       - url: examples/saildrone-list-access-example.json
-        type: Example
+        type: Examples
       - url: examples/saildrone-get-time-series-example.json
-        type: Example
+        type: Examples
       - url: rules/saildrone-rules.yml
         type: SpectralRules
     description: >-
@@ -90,7 +90,7 @@ common:
     url: https://www.saildrone.com/platform/voyager
   - type: Platform
     url: https://www.saildrone.com/platform/explorer
-  - type: Service
+  - type: Services
     url: https://www.saildrone.com/service-model/fully-managed
   - type: Capability
     url: https://www.saildrone.com/capabilities/metocean-survey
