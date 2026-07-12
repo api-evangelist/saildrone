@@ -70,6 +70,8 @@ apis:
       time-series telemetry across the four canonical Saildrone datasets — vehicle, atmospheric, oceanographic, and
       biogeochemical — plus drone access discovery and a health probe. Hosted at developer-mission.saildrone.com.
 common:
+  - type: DomainSecurity
+    url: security/saildrone-domain-security.yml
   - type: Website
     url: https://www.saildrone.com
   - type: About
@@ -122,6 +124,8 @@ common:
     url: finops/saildrone-finops.yml
   - type: Vocabulary
     url: vocabulary/saildrone-vocabulary.yml
+  - url: https://www.saildrone.com/news
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
