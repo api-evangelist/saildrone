@@ -13,9 +13,21 @@ description: >-
   drone access discovery, and time-series retrieval across vehicle, atmospheric, oceanographic, and biogeochemical
   datasets. Open ocean data from past missions is published via NOAA PMEL ERDDAP and NCEI under open-data terms.
 type: Index
+accessModel:
+  pricing: free
+  onboarding: approval
+  trial: false
+  try_now: false
+  public: false
+  label: Free · Requires approval
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
 position: Provider
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/saildrone.png
 tags:
   - Maritime
   - Ocean Data
