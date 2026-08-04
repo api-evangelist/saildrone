@@ -178,7 +178,7 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: Bearer token obtained from POST /v1/auth (sent as `authorization: <token>`).
+      description: "Bearer token obtained from POST /v1/auth (sent as `authorization: <token>`)."
 
   schemas:
     HealthResponse:
