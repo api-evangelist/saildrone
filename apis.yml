@@ -47,40 +47,88 @@ created: '2026-05-24'
 modified: '2026-05-24'
 specificationVersion: '0.20'
 apis:
-  - aid: saildrone:saildrone-mission-api
-    name: Saildrone Mission API
-    tags:
-      - Saildrone
-      - Mission
-      - Time Series
-      - Ocean Data
-      - METOC
-    humanURL: https://www.saildrone.com/data-delivery/api
-    properties:
-      - url: https://www.saildrone.com/data-delivery/api
-        type: Documentation
-      - url: https://developer-mission.saildrone.com/api-docs
-        type: SwaggerUI
-      - url: openapi/saildrone-mission-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/saildrone-mission-access-schema.json
-        type: JSONSchema
-      - url: json-schema/saildrone-mission-time-series-record-schema.json
-        type: JSONSchema
-      - url: json-ld/saildrone-context.jsonld
-        type: JSONLD
-      - url: examples/saildrone-authenticate-example.json
-        type: Examples
-      - url: examples/saildrone-list-access-example.json
-        type: Examples
-      - url: examples/saildrone-get-time-series-example.json
-        type: Examples
-      - url: rules/saildrone-rules.yml
-        type: SpectralRules
-    description: >-
-      Saildrone Public Mission API (BETA). Provides authenticated access via a key/secret bearer flow to per-mission
-      time-series telemetry across the four canonical Saildrone datasets — vehicle, atmospheric, oceanographic, and
-      biogeochemical — plus drone access discovery and a health probe. Hosted at developer-mission.saildrone.com.
+- aid: saildrone:saildrone-authentication-api
+  name: Saildrone Authentication API
+  description: Key/secret exchange for bearer tokens and drone access discovery
+  humanURL: https://www.saildrone.com/data-delivery/api
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/saildrone-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://www.saildrone.com/data-delivery/api
+  - type: SwaggerUI
+    url: https://developer-mission.saildrone.com/api-docs
+  - type: JSONSchema
+    url: json-schema/saildrone-mission-access-schema.json
+  - type: JSONSchema
+    url: json-schema/saildrone-mission-time-series-record-schema.json
+  - type: JSONLD
+    url: json-ld/saildrone-context.jsonld
+  - type: Examples
+    url: examples/saildrone-authenticate-example.json
+  - type: Examples
+    url: examples/saildrone-list-access-example.json
+  - type: Examples
+    url: examples/saildrone-get-time-series-example.json
+  - type: SpectralRules
+    url: rules/saildrone-rules.yml
+- aid: saildrone:saildrone-health-api
+  name: Saildrone Health API
+  description: Service health check
+  humanURL: https://www.saildrone.com/data-delivery/api
+  tags:
+  - Health
+  properties:
+  - type: OpenAPI
+    url: openapi/saildrone-health-api-openapi.yml
+  - type: Documentation
+    url: https://www.saildrone.com/data-delivery/api
+  - type: SwaggerUI
+    url: https://developer-mission.saildrone.com/api-docs
+  - type: JSONSchema
+    url: json-schema/saildrone-mission-access-schema.json
+  - type: JSONSchema
+    url: json-schema/saildrone-mission-time-series-record-schema.json
+  - type: JSONLD
+    url: json-ld/saildrone-context.jsonld
+  - type: Examples
+    url: examples/saildrone-authenticate-example.json
+  - type: Examples
+    url: examples/saildrone-list-access-example.json
+  - type: Examples
+    url: examples/saildrone-get-time-series-example.json
+  - type: SpectralRules
+    url: rules/saildrone-rules.yml
+- aid: saildrone:saildrone-time-series-api
+  name: Saildrone Time Series API
+  description: >-
+    Mission time-series data across vehicle, atmospheric, oceanographic, and biogeochemical datasets
+  humanURL: https://www.saildrone.com/data-delivery/api
+  tags:
+  - Time Series
+  properties:
+  - type: OpenAPI
+    url: openapi/saildrone-time-series-api-openapi.yml
+  - type: Documentation
+    url: https://www.saildrone.com/data-delivery/api
+  - type: SwaggerUI
+    url: https://developer-mission.saildrone.com/api-docs
+  - type: JSONSchema
+    url: json-schema/saildrone-mission-access-schema.json
+  - type: JSONSchema
+    url: json-schema/saildrone-mission-time-series-record-schema.json
+  - type: JSONLD
+    url: json-ld/saildrone-context.jsonld
+  - type: Examples
+    url: examples/saildrone-authenticate-example.json
+  - type: Examples
+    url: examples/saildrone-list-access-example.json
+  - type: Examples
+    url: examples/saildrone-get-time-series-example.json
+  - type: SpectralRules
+    url: rules/saildrone-rules.yml
 common:
   - type: DomainSecurity
     url: security/saildrone-domain-security.yml
