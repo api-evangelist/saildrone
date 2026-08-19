@@ -1,0 +1,139 @@
+openapi: 3.2.0
+info:
+  title: Saildrone Mission Authentication API
+  description: 'Saildrone Public Mission API (BETA). Provides authenticated access to Saildrone mission telemetry and time-series data collected by Saildrone''s fleet of wind/solar autonomous surface vehicles (USVs). Surfaces include health, key/secret authentication, drone access discovery, and per-mission time-series retrieval across vehicle, atmospheric, oceanographic, and biogeochemical datasets. Endpoints, parameters, and authentication flow are reconstructed from the public Swagger interface at developer-mission.saildrone.com/api-docs and confirmed open source clients (e.g. nwfsc-fram/SaildroneTS).
+
+    '
+  version: v1
+  contact:
+    name: Saildrone Data Solutions
+    url: https://www.saildrone.com/contact
+  license:
+    name: Saildrone API Terms
+    url: https://www.saildrone.com/terms
+servers:
+- url: https://developer-mission.saildrone.com
+  description: Saildrone Public Mission API (BETA)
+security:
+- BearerAuth: []
+tags:
+- name: Authentication
+  description: Key/secret exchange for bearer tokens and drone access discovery
+paths:
+  /v1/auth:
+    post:
+      summary: Authenticate With Key And Secret
+      description: Exchange a Saildrone-issued API key and secret for a bearer token used on subsequent calls. Tokens are short-lived; clients should re-authenticate before expiry.
+      operationId: authenticate
+      tags:
+      - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthRequest'
+      responses:
+        '200':
+          description: Bearer token issued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          description: Invalid key or secret
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/auth/access:
+    get:
+      summary: List Drone Access
+      description: List drones (missions) the authenticated key has access to, including each drone's allowed start/end date range and which datasets are exposed (vehicle, atmospheric, oceanographic, biogeochemical).
+      operationId: listAccess
+      tags:
+      - Authentication
+      responses:
+        '200':
+          description: List of authorized drones and time ranges
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessResponse'
+        '401':
+          description: Missing or expired bearer token
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+        code:
+          type: integer
+    AccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            access:
+              type: array
+              items:
+                $ref: '#/components/schemas/AccessEntry'
+    AuthResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        token:
+          type: string
+          description: Bearer token to use in the `authorization` header on subsequent calls.
+        expires_at:
+          type: string
+          format: date-time
+    AuthRequest:
+      type: object
+      required:
+      - key
+      - secret
+      properties:
+        key:
+          type: string
+          description: Saildrone-issued API key.
+        secret:
+          type: string
+          description: Saildrone-issued API secret.
+    AccessEntry:
+      type: object
+      properties:
+        drone_id:
+          type: integer
+          example: 1039
+        start_date:
+          type: string
+          format: date-time
+        end_date:
+          type: string
+          format: date-time
+        data_set:
+          type: array
+          items:
+            type: string
+            enum:
+            - vehicle
+            - atmospheric
+            - oceanographic
+            - biogeochemical
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Bearer token obtained from POST /v1/auth (sent as `authorization: <token>`).'

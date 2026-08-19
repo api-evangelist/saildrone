@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Saildrone Mission Health API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Service Health",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://developer-mission.saildrone.com/health"
+          },
+          "docs": "Returns the health status of the Saildrone Mission API. Used by clients to verify connectivity before authenticating."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

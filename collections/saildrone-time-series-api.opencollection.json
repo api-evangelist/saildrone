@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Saildrone Mission Time Series API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Time Series",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Mission Time Series",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://developer-mission.saildrone.com/v1/timeseries/:mission",
+            "params": [
+              {
+                "name": "mission",
+                "value": "",
+                "type": "path",
+                "description": "Drone / mission identifier (e.g. 1023, 1039, 1040)."
+              },
+              {
+                "name": "data_set",
+                "value": "",
+                "type": "query",
+                "description": "Which Saildrone dataset to return for this mission."
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "ISO-8601 start date/time (inclusive)."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "ISO-8601 end date/time (inclusive)."
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Sampling interval in minutes between returned points (1 = no thinning)."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum records per response page."
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for gps_time."
+              }
+            ]
+          },
+          "docs": "Retrieve time-series records for a specific drone/mission and dataset over a given window. Supports interval thinning, limits, and ascending/descending order."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

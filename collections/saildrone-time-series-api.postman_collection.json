@@ -1,0 +1,423 @@
+{
+  "item": [
+    {
+      "id": "9ce2bd3c-1262-472a-ba76-1e90b3ae5884",
+      "name": "Time Series",
+      "description": {
+        "content": "Mission time-series data across vehicle, atmospheric, oceanographic, and biogeochemical datasets",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4c2b6881-6393-4525-94f0-683096e4acd5",
+          "name": "Get Mission Time Series",
+          "request": {
+            "name": "Get Mission Time Series",
+            "description": {
+              "content": "Retrieve time-series records for a specific drone/mission and dataset over a given window. Supports interval thinning, limits, and ascending/descending order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "timeseries",
+                ":mission"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "data_set",
+                  "value": "<string>",
+                  "description": "(Required) Which Saildrone dataset to return for this mission."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<dateTime>",
+                  "description": "(Required) ISO-8601 start date/time (inclusive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<dateTime>",
+                  "description": "(Required) ISO-8601 end date/time (inclusive)."
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "1",
+                  "description": "Sampling interval in minutes between returned points (1 = no thinning)."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "1000",
+                  "description": "Maximum records per response page."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "asc",
+                  "description": "Sort order for gps_time."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "mission",
+                  "description": "(Required) Drone / mission identifier (e.g. 1023, 1039, 1040)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f02cd7c2-f6bf-4f04-9eae-56c094957720",
+              "name": "Time-series payload with metadata and data array",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "timeseries",
+                    ":mission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "data_set",
+                      "value": "oceanographic"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2024-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2024-01-02T00:00:00Z"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "mission",
+                      "description": "(Required) Drone / mission identifier (e.g. 1023, 1039, 1040)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"meta\": {\n    \"key_0\": {\n      \"units\": \"string\",\n      \"long_name\": \"string\",\n      \"standard_name\": \"string\",\n      \"valid_min\": 1677.109177097168,\n      \"valid_max\": 6739.020373662066\n    }\n  },\n  \"data\": [\n    {\n      \"gps_time\": 2373.9529531973326,\n      \"latitude\": 8192.914677008612,\n      \"longitude\": 6792.550484315769,\n      \"TEMP_AIR_MEAN\": 4361.6496067593525,\n      \"WIND_FROM_MEAN\": 9293.48449204726,\n      \"WIND_SPEED_MEAN\": 7922.561961918175,\n      \"TEMP_SBE37_MEAN\": 7742.114719158098,\n      \"SAL_SBE37_MEAN\": 4000.121410967793,\n      \"O2_CONC_SBE37_MEAN\": 397.00807353420964,\n      \"CHLOR_RBR_MEAN\": 6674.337694480801,\n      \"CO2_DRY_PPM\": 9130.211859680627,\n      \"SOG\": 3422.361410955944,\n      \"COG\": 9846.894474870282,\n      \"HDG\": 5314.604404348059\n    },\n    {\n      \"gps_time\": 1458.5137036540252,\n      \"latitude\": 1662.443485697056,\n      \"longitude\": 7223.778711265252,\n      \"TEMP_AIR_MEAN\": 10.232879821788776,\n      \"WIND_FROM_MEAN\": 9880.750930851458,\n      \"WIND_SPEED_MEAN\": 1461.2346938062326,\n      \"TEMP_SBE37_MEAN\": 9127.494722757032,\n      \"SAL_SBE37_MEAN\": 2265.9751620539237,\n      \"O2_CONC_SBE37_MEAN\": 6308.051922467387,\n      \"CHLOR_RBR_MEAN\": 2979.668494527904,\n      \"CO2_DRY_PPM\": 8567.992326171425,\n      \"SOG\": 6163.773046690838,\n      \"COG\": 8141.263923401174,\n      \"HDG\": 3609.5040167949232\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c652da39-8a04-4950-9232-4055c789cf97",
+              "name": "Missing or expired bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "timeseries",
+                    ":mission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "data_set",
+                      "value": "oceanographic"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2024-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2024-01-02T00:00:00Z"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "mission",
+                      "description": "(Required) Drone / mission identifier (e.g. 1023, 1039, 1040)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b10c394c-325a-4e60-945b-01e63948e6f8",
+              "name": "Mission not in this key's access list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "timeseries",
+                    ":mission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "data_set",
+                      "value": "oceanographic"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2024-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2024-01-02T00:00:00Z"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "mission",
+                      "description": "(Required) Drone / mission identifier (e.g. 1023, 1039, 1040)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4248070b-48bf-4f02-9e9c-9242838b90dd",
+              "name": "Mission or dataset not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "timeseries",
+                    ":mission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "data_set",
+                      "value": "oceanographic"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2024-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2024-01-02T00:00:00Z"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "mission",
+                      "description": "(Required) Drone / mission identifier (e.g. 1023, 1039, 1040)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://developer-mission.saildrone.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "abb1b811-a8dd-4bd8-a638-3a61fffea32d",
+    "name": "Saildrone Mission Time Series API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Saildrone Public Mission API (BETA). Provides authenticated access to Saildrone mission telemetry and time-series data collected by Saildrone's fleet of wind/solar autonomous surface vehicles (USVs). Surfaces include health, key/secret authentication, drone access discovery, and per-mission time-series retrieval across vehicle, atmospheric, oceanographic, and biogeochemical datasets. Endpoints, parameters, and authentication flow are reconstructed from the public Swagger interface at developer-mission.saildrone.com/api-docs and confirmed open source clients (e.g. nwfsc-fram/SaildroneTS).\n\n\nContact Support:\n Name: Saildrone Data Solutions",
+      "type": "text/plain"
+    }
+  }
+}

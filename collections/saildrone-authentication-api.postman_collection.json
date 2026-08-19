@@ -1,0 +1,317 @@
+{
+  "item": [
+    {
+      "id": "ef3f3410-df88-41cc-b6e9-ecb63d15e741",
+      "name": "Authentication",
+      "description": {
+        "content": "Key/secret exchange for bearer tokens and drone access discovery",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1266255a-9d1d-49ae-8617-78e186df6769",
+          "name": "Authenticate With Key And Secret",
+          "request": {
+            "name": "Authenticate With Key And Secret",
+            "description": {
+              "content": "Exchange a Saildrone-issued API key and secret for a bearer token used on subsequent calls. Tokens are short-lived; clients should re-authenticate before expiry.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"<string>\",\n  \"secret\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "182eb11e-2dc2-4fde-94a5-19f66d06f5b5",
+              "name": "Bearer token issued",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"secret\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"token\": \"string\",\n  \"expires_at\": \"1951-10-04T02:27:23.091Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f54c034-4d2e-423e-9690-af3a40e535dc",
+              "name": "Invalid key or secret",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"secret\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"string\",\n  \"code\": 6141\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1133c91d-7607-4a27-bfde-b6b4c22d11f3",
+          "name": "List Drone Access",
+          "request": {
+            "name": "List Drone Access",
+            "description": {
+              "content": "List drones (missions) the authenticated key has access to, including each drone's allowed start/end date range and which datasets are exposed (vehicle, atmospheric, oceanographic, biogeochemical).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "access"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8e8434f3-2647-4ebe-aa93-e0bb0367d4c9",
+              "name": "List of authorized drones and time ranges",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "access"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": {\n    \"access\": [\n      {\n        \"drone_id\": 1039,\n        \"start_date\": \"1965-10-09T14:08:08.085Z\",\n        \"end_date\": \"1996-02-10T16:44:34.074Z\",\n        \"data_set\": [\n          \"oceanographic\",\n          \"atmospheric\"\n        ]\n      },\n      {\n        \"drone_id\": 1039,\n        \"start_date\": \"2000-02-19T20:54:44.639Z\",\n        \"end_date\": \"2023-06-02T17:34:25.794Z\",\n        \"data_set\": [\n          \"atmospheric\",\n          \"atmospheric\"\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c8e3124-c976-4fde-a2be-73ce76f8be24",
+              "name": "Missing or expired bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "access"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://developer-mission.saildrone.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ccb71241-eb92-47df-8798-624e91bdef52",
+    "name": "Saildrone Mission Authentication API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Saildrone Public Mission API (BETA). Provides authenticated access to Saildrone mission telemetry and time-series data collected by Saildrone's fleet of wind/solar autonomous surface vehicles (USVs). Surfaces include health, key/secret authentication, drone access discovery, and per-mission time-series retrieval across vehicle, atmospheric, oceanographic, and biogeochemical datasets. Endpoints, parameters, and authentication flow are reconstructed from the public Swagger interface at developer-mission.saildrone.com/api-docs and confirmed open source clients (e.g. nwfsc-fram/SaildroneTS).\n\n\nContact Support:\n Name: Saildrone Data Solutions",
+      "type": "text/plain"
+    }
+  }
+}

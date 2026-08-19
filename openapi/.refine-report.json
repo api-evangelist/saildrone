@@ -1,0 +1,23 @@
+{
+  "provider": "saildrone",
+  "sources": [
+    "saildrone-authentication-api-openapi.yml",
+    "saildrone-health-api-openapi.yml",
+    "saildrone-time-series-api-openapi.yml"
+  ],
+  "outputs": [
+    "saildrone-authentication-api-openapi.yml",
+    "saildrone-health-api-openapi.yml",
+    "saildrone-time-series-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "saildrone-authentication-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "saildrone-health-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "saildrone-time-series-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": []
+}

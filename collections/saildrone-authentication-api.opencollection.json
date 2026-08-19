@@ -1,0 +1,50 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Saildrone Mission Authentication API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authenticate With Key And Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://developer-mission.saildrone.com/v1/auth",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exchange a Saildrone-issued API key and secret for a bearer token used on subsequent calls. Tokens are short-lived; clients should re-authenticate before expiry."
+        },
+        {
+          "info": {
+            "name": "List Drone Access",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://developer-mission.saildrone.com/v1/auth/access"
+          },
+          "docs": "List drones (missions) the authenticated key has access to, including each drone's allowed start/end date range and which datasets are exposed (vehicle, atmospheric, oceanographic, biogeochemical)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,53 @@
+openapi: 3.2.0
+info:
+  title: Saildrone Mission Health API
+  description: 'Saildrone Public Mission API (BETA). Provides authenticated access to Saildrone mission telemetry and time-series data collected by Saildrone''s fleet of wind/solar autonomous surface vehicles (USVs). Surfaces include health, key/secret authentication, drone access discovery, and per-mission time-series retrieval across vehicle, atmospheric, oceanographic, and biogeochemical datasets. Endpoints, parameters, and authentication flow are reconstructed from the public Swagger interface at developer-mission.saildrone.com/api-docs and confirmed open source clients (e.g. nwfsc-fram/SaildroneTS).
+
+    '
+  version: v1
+  contact:
+    name: Saildrone Data Solutions
+    url: https://www.saildrone.com/contact
+  license:
+    name: Saildrone API Terms
+    url: https://www.saildrone.com/terms
+servers:
+- url: https://developer-mission.saildrone.com
+  description: Saildrone Public Mission API (BETA)
+security:
+- BearerAuth: []
+tags:
+- name: Health
+  description: Service health check
+paths:
+  /health:
+    get:
+      summary: Get Service Health
+      description: Returns the health status of the Saildrone Mission API. Used by clients to verify connectivity before authenticating.
+      operationId: getHealth
+      tags:
+      - Health
+      security: []
+      responses:
+        '200':
+          description: Health check response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+components:
+  schemas:
+    HealthResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        status:
+          type: string
+          example: ok
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Bearer token obtained from POST /v1/auth (sent as `authorization: <token>`).'

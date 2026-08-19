@@ -1,0 +1,119 @@
+{
+  "item": [
+    {
+      "id": "dd01ac39-1985-4aea-a19c-1a4d30e519ba",
+      "name": "Health",
+      "description": {
+        "content": "Service health check",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ef02cbd2-d865-4958-9073-31a0428289a4",
+          "name": "Get Service Health",
+          "request": {
+            "name": "Get Service Health",
+            "description": {
+              "content": "Returns the health status of the Saildrone Mission API. Used by clients to verify connectivity before authenticating.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "health"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e778b758-e355-40cd-8862-79fc393e7029",
+              "name": "Health check response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "health"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"status\": \"ok\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://developer-mission.saildrone.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b95182e1-8d30-404f-b817-134ef507b141",
+    "name": "Saildrone Mission Health API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Saildrone Public Mission API (BETA). Provides authenticated access to Saildrone mission telemetry and time-series data collected by Saildrone's fleet of wind/solar autonomous surface vehicles (USVs). Surfaces include health, key/secret authentication, drone access discovery, and per-mission time-series retrieval across vehicle, atmospheric, oceanographic, and biogeochemical datasets. Endpoints, parameters, and authentication flow are reconstructed from the public Swagger interface at developer-mission.saildrone.com/api-docs and confirmed open source clients (e.g. nwfsc-fram/SaildroneTS).\n\n\nContact Support:\n Name: Saildrone Data Solutions",
+      "type": "text/plain"
+    }
+  }
+}
