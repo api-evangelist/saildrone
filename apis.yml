@@ -45,7 +45,7 @@ tags:
 url: https://raw.githubusercontent.com/api-evangelist/saildrone/refs/heads/main/apis.yml
 created: '2026-05-24'
 modified: '2026-05-24'
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 apis:
 - aid: saildrone:saildrone-authentication-api
   name: Saildrone Authentication API
