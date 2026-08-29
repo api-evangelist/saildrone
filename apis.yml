@@ -13,6 +13,18 @@ description: >-
   drone access discovery, and time-series retrieval across vehicle, atmospheric, oceanographic, and biogeochemical
   datasets. Open ocean data from past missions is published via NOAA PMEL ERDDAP and NCEI under open-data terms.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: approval
