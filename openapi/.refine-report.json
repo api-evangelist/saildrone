@@ -1,9 +1,7 @@
 {
   "provider": "saildrone",
   "sources": [
-    "saildrone-authentication-api-openapi.yml",
-    "saildrone-health-api-openapi.yml",
-    "saildrone-time-series-api-openapi.yml"
+    "_original/saildrone-mission-api-openapi.yml"
   ],
   "outputs": [
     "saildrone-authentication-api-openapi.yml",
@@ -14,10 +12,13 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "saildrone-authentication-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "saildrone-health-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "saildrone-time-series-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "saildrone-mission-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "saildrone-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "saildrone-health-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "saildrone-time-series-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

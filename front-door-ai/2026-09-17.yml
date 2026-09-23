@@ -1,0 +1,26 @@
+# Front Door AI Index — saildrone — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: saildrone
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.saildrone.com
+  final_host: www.saildrone.com
+  ownership: own
+  owner: saildrone
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 3
+  host_score: 3
+  density: 5.43
+  words: 552
+  tiers:
+    agentic: 0
+    core: 3
+    model: 0
+  ambiguous: 5
+  top_terms:
+    intelligence: 5
+    AI: 3

@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Saildrone Mission Authentication API
-  description: 'Saildrone Public Mission API (BETA). Provides authenticated access to Saildrone mission telemetry and time-series data collected by Saildrone''s fleet of wind/solar autonomous surface vehicles (USVs). Surfaces include health, key/secret authentication, drone access discovery, and per-mission time-series retrieval across vehicle, atmospheric, oceanographic, and biogeochemical datasets. Endpoints, parameters, and authentication flow are reconstructed from the public Swagger interface at developer-mission.saildrone.com/api-docs and confirmed open source clients (e.g. nwfsc-fram/SaildroneTS).
-
-    '
+  description: Saildrone Public Mission API (BETA).
   version: v1
   contact:
     name: Saildrone Data Solutions
@@ -65,6 +63,50 @@ paths:
           description: Missing or expired bearer token
 components:
   schemas:
+    AuthRequest:
+      type: object
+      required:
+      - key
+      - secret
+      properties:
+        key:
+          type: string
+          description: Saildrone-issued API key.
+        secret:
+          type: string
+          description: Saildrone-issued API secret.
+    AuthResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        token:
+          type: string
+          description: Bearer token to use in the `authorization` header on subsequent calls.
+        expires_at:
+          type: string
+          format: date-time
+    AccessEntry:
+      type: object
+      properties:
+        drone_id:
+          type: integer
+          example: 1039
+        start_date:
+          type: string
+          format: date-time
+        end_date:
+          type: string
+          format: date-time
+        data_set:
+          type: array
+          items:
+            type: string
+            enum:
+            - vehicle
+            - atmospheric
+            - oceanographic
+            - biogeochemical
     ErrorResponse:
       type: object
       properties:
@@ -87,50 +129,6 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/AccessEntry'
-    AuthResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        token:
-          type: string
-          description: Bearer token to use in the `authorization` header on subsequent calls.
-        expires_at:
-          type: string
-          format: date-time
-    AuthRequest:
-      type: object
-      required:
-      - key
-      - secret
-      properties:
-        key:
-          type: string
-          description: Saildrone-issued API key.
-        secret:
-          type: string
-          description: Saildrone-issued API secret.
-    AccessEntry:
-      type: object
-      properties:
-        drone_id:
-          type: integer
-          example: 1039
-        start_date:
-          type: string
-          format: date-time
-        end_date:
-          type: string
-          format: date-time
-        data_set:
-          type: array
-          items:
-            type: string
-            enum:
-            - vehicle
-            - atmospheric
-            - oceanographic
-            - biogeochemical
   securitySchemes:
     BearerAuth:
       type: http

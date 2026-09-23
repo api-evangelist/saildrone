@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Saildrone Mission Health API
-  description: 'Saildrone Public Mission API (BETA). Provides authenticated access to Saildrone mission telemetry and time-series data collected by Saildrone''s fleet of wind/solar autonomous surface vehicles (USVs). Surfaces include health, key/secret authentication, drone access discovery, and per-mission time-series retrieval across vehicle, atmospheric, oceanographic, and biogeochemical datasets. Endpoints, parameters, and authentication flow are reconstructed from the public Swagger interface at developer-mission.saildrone.com/api-docs and confirmed open source clients (e.g. nwfsc-fram/SaildroneTS).
-
-    '
+  description: Saildrone Public Mission API (BETA).
   version: v1
   contact:
     name: Saildrone Data Solutions
