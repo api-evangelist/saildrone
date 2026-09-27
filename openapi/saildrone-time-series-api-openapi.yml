@@ -102,17 +102,6 @@ paths:
           description: Mission or dataset not found
 components:
   schemas:
-    TimeSeriesResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        meta:
-          $ref: '#/components/schemas/TimeSeriesMeta'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/TimeSeriesRecord'
     TimeSeriesMeta:
       type: object
       description: Per-variable metadata (units, long_name, valid range, etc.) for the returned dataset.
@@ -129,6 +118,17 @@ components:
             type: number
           valid_max:
             type: number
+    TimeSeriesResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        meta:
+          $ref: '#/components/schemas/TimeSeriesMeta'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeSeriesRecord'
     TimeSeriesRecord:
       type: object
       description: A single time-stamped sample. Fields vary by dataset (vehicle, atmospheric, oceanographic, biogeochemical) but always include gps_time, latitude, longitude.

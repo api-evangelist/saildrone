@@ -63,6 +63,27 @@ paths:
           description: Missing or expired bearer token
 components:
   schemas:
+    AccessEntry:
+      type: object
+      properties:
+        drone_id:
+          type: integer
+          example: 1039
+        start_date:
+          type: string
+          format: date-time
+        end_date:
+          type: string
+          format: date-time
+        data_set:
+          type: array
+          items:
+            type: string
+            enum:
+            - vehicle
+            - atmospheric
+            - oceanographic
+            - biogeochemical
     AuthRequest:
       type: object
       required:
@@ -86,27 +107,6 @@ components:
         expires_at:
           type: string
           format: date-time
-    AccessEntry:
-      type: object
-      properties:
-        drone_id:
-          type: integer
-          example: 1039
-        start_date:
-          type: string
-          format: date-time
-        end_date:
-          type: string
-          format: date-time
-        data_set:
-          type: array
-          items:
-            type: string
-            enum:
-            - vehicle
-            - atmospheric
-            - oceanographic
-            - biogeochemical
     ErrorResponse:
       type: object
       properties:
