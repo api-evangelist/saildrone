@@ -63,6 +63,28 @@ paths:
           description: Missing or expired bearer token
 components:
   schemas:
+    AuthRequest:
+      type: object
+      required:
+      - key
+      - secret
+      properties:
+        key:
+          type: string
+          description: Saildrone-issued API key.
+        secret:
+          type: string
+          description: Saildrone-issued API secret.
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+        code:
+          type: integer
     AccessEntry:
       type: object
       properties:
@@ -84,18 +106,6 @@ components:
             - atmospheric
             - oceanographic
             - biogeochemical
-    AuthRequest:
-      type: object
-      required:
-      - key
-      - secret
-      properties:
-        key:
-          type: string
-          description: Saildrone-issued API key.
-        secret:
-          type: string
-          description: Saildrone-issued API secret.
     AuthResponse:
       type: object
       properties:
@@ -107,16 +117,6 @@ components:
         expires_at:
           type: string
           format: date-time
-    ErrorResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: false
-        error:
-          type: string
-        code:
-          type: integer
     AccessResponse:
       type: object
       properties:
