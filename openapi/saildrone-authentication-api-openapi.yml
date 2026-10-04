@@ -63,28 +63,6 @@ paths:
           description: Missing or expired bearer token
 components:
   schemas:
-    AuthRequest:
-      type: object
-      required:
-      - key
-      - secret
-      properties:
-        key:
-          type: string
-          description: Saildrone-issued API key.
-        secret:
-          type: string
-          description: Saildrone-issued API secret.
-    ErrorResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: false
-        error:
-          type: string
-        code:
-          type: integer
     AccessEntry:
       type: object
       properties:
@@ -106,17 +84,6 @@ components:
             - atmospheric
             - oceanographic
             - biogeochemical
-    AuthResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        token:
-          type: string
-          description: Bearer token to use in the `authorization` header on subsequent calls.
-        expires_at:
-          type: string
-          format: date-time
     AccessResponse:
       type: object
       properties:
@@ -129,6 +96,39 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/AccessEntry'
+    AuthResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        token:
+          type: string
+          description: Bearer token to use in the `authorization` header on subsequent calls.
+        expires_at:
+          type: string
+          format: date-time
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+        code:
+          type: integer
+    AuthRequest:
+      type: object
+      required:
+      - key
+      - secret
+      properties:
+        key:
+          type: string
+          description: Saildrone-issued API key.
+        secret:
+          type: string
+          description: Saildrone-issued API secret.
   securitySchemes:
     BearerAuth:
       type: http
