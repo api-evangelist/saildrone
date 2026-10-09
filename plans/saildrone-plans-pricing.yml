@@ -1,3 +1,8 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (dated 2026-05-24 by the file itself), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
+generated: '2026-05-24'
 specification: API Commons Plans
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
@@ -104,3 +109,45 @@ plans:
         unit: 1
         price: '0.00'
         userMultiplied: false
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - negotiated
+  units:
+  - request
+  - seat
+  plans:
+  - name: Saildrone Fully Managed (Mission-as-a-Service)
+    access: negotiated
+    model: negotiated
+    model_how: stated
+    units:
+    - other
+    periods:
+    - term
+  - name: Saildrone Public Mission API (BETA)
+    access: other
+    model: free
+    model_how: derived
+    units:
+    - request
+    periods:
+    - term
+  - name: Saildrone Mission Portal
+    access: other
+    model: free
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - term
+  - name: NOAA PMEL Saildrone Open Data
+    access: free
+    model: free
+    model_how: derived
+    units:
+    - other
+    periods:
+    - per-use
